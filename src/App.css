@@ -1,0 +1,113 @@
+:root {
+  --bg: #0f1117;
+  --panel: #171a21;
+  --border: #2a2f3a;
+  --text: #e6e8eb;
+  --muted: #9aa3b2;
+  --accent: #61dafb;
+  --code-bg: #11141b;
+}
+
+* { box-sizing: border-box; }
+
+.app {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Nav */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1.25rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.nav__brand {
+  font-weight: 700;
+  margin-right: 0.75rem;
+  color: var(--accent);
+}
+.nav__link {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.nav__link:hover { color: var(--text); }
+.nav__link--active {
+  color: var(--bg);
+  background: var(--accent);
+  font-weight: 600;
+}
+
+/* Content */
+.content {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+.page h1 { font-size: 1.8rem; margin-bottom: 1.5rem;color: var(--accent); }
+.page h2 {
+  font-size: 1.1rem;
+  margin: 1.75rem 0 0.5rem;
+  color: var(--accent);
+}
+.page p { color: var(--text); line-height: 1.6; }
+.page code {
+  background: var(--code-bg);
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+.muted { color: var(--muted); }
+
+/* Code block */
+.code-block {
+  margin: 0.5rem 0 1rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.code-block__title {
+  padding: 0.4rem 0.8rem;
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.code-block pre {
+  margin: 0;
+  padding: 1rem;
+  background: var(--code-bg);
+  overflow-x: auto;
+  text-align: left;
+}
+.code-block code {
+  background: none;
+  padding: 0;
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #d7dbe0;
+}
+
+/* Callout */
+.callout {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  border-left: 3px solid var(--accent);
+  background: var(--panel);
+  border-radius: 4px;
+  line-height: 1.6;
+}
