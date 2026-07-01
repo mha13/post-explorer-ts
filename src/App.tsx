@@ -4,10 +4,11 @@ import Phase1Page from "./pages/Phase1Page";
 import Phase2Page from "./pages/Phase2Page";
 import InterfaceVsTypePage from "./pages/InterfaceVsTypePage";
 import PostExplorerPage from "./pages/PostExplorerPage";
+import RandomPersonPage from "./pages/RandomPersonPage";
 
 // The set of pages the nav can switch between.
 // A union type means TS will error if we ever use a page name that isn't listed.
-type Page = "phase1" | "phase2" | "interfaceVsType" | "postExplorer";
+type Page = "phase1" | "phase2" | "interfaceVsType" | "postExplorer" | "randomPerson";
 
 interface NavItem {
   id: Page;
@@ -19,6 +20,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: "phase2", label: "Phase 2 · Typing React" },
   { id: "interfaceVsType", label: "interface vs type" },
   { id: "postExplorer", label: "Post Explorer" },
+  { id: "randomPerson", label: "Random Person" },
 ];
 
 function App() {
@@ -44,6 +46,7 @@ function App() {
         {page === "phase2" && <Phase2Page />}
         {page === "interfaceVsType" && <InterfaceVsTypePage />}
         {page === "postExplorer" && <PostExplorerPage />}
+        {page === "randomPerson" && <RandomPersonPage />}
       </main>
     </div>
   );

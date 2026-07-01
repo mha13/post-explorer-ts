@@ -1,4 +1,4 @@
-import type { Post, Comment, User } from "./types";
+import type { Post, Comment, User, Person, RandomUserResponse } from "./types";
 
 const BASE_URL = "https://jsonplaceholder.typicode.com";
 
@@ -23,4 +23,25 @@ export function getComments(postId: number): Promise<Comment[]> {
 
 export function getUser(userId: number): Promise<User> {
   return getJSON<User>(`/users/${userId}`);
+}
+
+const RANDOM_USER_URL = "https://randomuser.me/api/";
+
+export async function getPerson(): Promise<Person> {
+  const res = await fetch(RANDOM_USER_URL);
+  if (!res.ok) {
+    throw new Error("Failed to receive the Person");
+  }
+  // Type the REAL response shape, then take the first result…
+  const json = (await res.json()) as RandomUserResponse;
+  const raw = json.results[0];
+
+  // …and map the nested raw shape into our clean flat Person.
+  return {
+    name: `${raw.name.first} ${raw.name.last}`,
+    gender: raw.gender,
+    email: raw.email,
+    picture: raw.picture.large,
+    phone: raw.phone,
+  };
 }
