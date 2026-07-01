@@ -1,57 +1,30 @@
-import { useEffect, useState } from "react";
-import type { Person } from "../types";
+import { useState } from "react";
 import { getPerson } from "../api";
+import { useFetch } from "../hooks/useFetch";
 import RandomPerson from "../components/RandomPerson";
 
 function RandomPersonPage() {
-  const [person, setPerson] = useState<Person | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // `reloadKey` bumps each time we want a NEW person → re-runs the effect.
+  // Bumping reloadKey re-runs the fetch (it's in the deps array).
   const [reloadKey, setReloadKey] = useState(0);
 
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-    setError(null);
-
-    async function load() {
-      try {
-        const result = await getPerson();
-        if (!cancelled) setPerson(result);
-      } catch (err) {
-        if (!cancelled) {
-          setError(err instanceof Error ? err.message : "Unknown error");
-        }
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
-    }
-
-    load(); // ← called in the effect BODY, not the cleanup
-
-    return () => {
-      cancelled = true; // cleanup just cancels; it does NOT render
-    };
-  }, [reloadKey]);
+  // One line replaces all the useState + useEffect + try/catch boilerplate.
+  // `person` is fully typed as ApiState<Person>.
+  const person = useFetch(getPerson, [reloadKey]);
 
   return (
     <article className="page">
       <h1>Random Person</h1>
 
-      {loading && <p className="muted">Loading…</p>}
-      {error && <p className="error">{error}</p>}
-
-      {/* render the badge only when we actually have a person */}
-      {person && <RandomPerson person={person} />}
+      {person.loading && <p className="muted">Loading…</p>}
+      {person.error && <p className="error">{person.error}</p>}
+      {person.data && <RandomPerson person={person.data} />}
 
       <button
         className="nav__link nav__link--active"
         style={{ marginTop: "1rem" }}
         onClick={() => setReloadKey((k) => k + 1)}
       >
-        New person {reloadKey}
+        New person
       </button>
     </article>
   );
