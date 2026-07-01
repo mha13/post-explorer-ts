@@ -9,7 +9,7 @@ import CheatsheetPage from "./pages/CheatsheetPage";
 
 // The set of pages the nav can switch between.
 // A union type means TS will error if we ever use a page name that isn't listed.
-type Page = "phase1" | "phase2" | "interfaceVsType" | "postExplorer" | "randomPerson";
+type Page = "phase1" | "phase2" | "interfaceVsType" | "postExplorer" | "randomPerson" | "cheatsheet";
 
 interface NavItem {
   id: Page;
@@ -22,6 +22,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: "interfaceVsType", label: "interface vs type" },
   { id: "postExplorer", label: "Post Explorer" },
   { id: "randomPerson", label: "Random Person" },
+  { id: "cheatsheet", label: "★ Cheatsheet" },
 ];
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
         {page === "interfaceVsType" && <InterfaceVsTypePage />}
         {page === "postExplorer" && <PostExplorerPage />}
         {page === "randomPerson" && <RandomPersonPage />}
+        {page === "cheatsheet" && <CheatsheetPage />}
       </main>
     </div>
   );
