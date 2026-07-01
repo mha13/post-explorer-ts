@@ -5,6 +5,7 @@ import Phase2Page from "./pages/Phase2Page";
 import InterfaceVsTypePage from "./pages/InterfaceVsTypePage";
 import PostExplorerPage from "./pages/PostExplorerPage";
 import RandomPersonPage from "./pages/RandomPersonPage";
+import CheatsheetPage from "./pages/CheatsheetPage";
 
 // The set of pages the nav can switch between.
 // A union type means TS will error if we ever use a page name that isn't listed.
