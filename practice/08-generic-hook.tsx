@@ -15,13 +15,20 @@ import type { Equal, Expect } from "./_check";
 //   return ___;
 // }
 
+export function useToggle(initial: boolean = false): readonly [boolean, () => void] {
+  const [on, setOn] = useState(initial);
+  const toggle = () => setOn((v) => !v);
+  return [on, toggle];
+}
+
+
 
 // ---- self-check (uncomment when ready) ----
-// type ToggleReturn = ReturnType<typeof useToggle>;
-// type T8 = Expect<Equal<ToggleReturn, readonly [boolean, () => void]>>;
+type ToggleReturn = ReturnType<typeof useToggle>;
+type T8 = Expect<Equal<ToggleReturn, readonly [boolean, () => void]>>;
 //
 // // Bonus: STRETCH — generalize to `useLocalState<T>(initial: T)` returning
 // // readonly [T, (next: T) => void]. Prove it with:
-// // type S = Expect<Equal<ReturnType<typeof useLocalState<number>>, readonly [number, (next: number) => void]>>;
+// type S = Expect<Equal<ReturnType<typeof useLocalState<number>>, readonly [number, (next: number) => void]>>;
 
 export {};

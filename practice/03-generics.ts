@@ -25,14 +25,21 @@ assert(last<number>([1, 2, 3]) === 3, "last returns final element");
 assert(last<string>(["a", "b", "c"]) === "c", "last returns final element");
 assert(last<string>([]) === undefined, "last of empty array is undefined");
 
-const users = [
+
+interface User {
+  id: number;
+  name: string;
+}
+
+const users: User[] = [
   { id: 1, name: "Ada" },
   { id: 2, name: "Linus" },
 ];
 assert(
-  JSON.stringify(pluck(users, "name")) === JSON.stringify(["Ada", "Linus"]),
+  JSON.stringify(pluck<User, "name">(users, "name")) === JSON.stringify(["Ada", "Linus"]),
   "pluck extracts the chosen key",
 );
+console.log("pluck result:", pluck(users, "name"));
 // This line SHOULD be a type error (uncomment to prove the constraint works):
 // pluck(users, "email"); // ❌ "email" is not a key of the user objects
 
